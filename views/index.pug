@@ -1,5 +1,17 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1 Akshay kumar gupta
+  p  Welcome to #{title} I am very boring
+  button.btn.btn-success(type="button", onclick="gofaster()") Press Me for details
+  div#faster Increase the speed 
+  a(href="/bag") View Bag page
+
+  script.
+    var mph = 20;
+    var change = 1;
+    function gofaster() {
+      mph = change + mph;
+      change = change + 1;
+      document.getElementById("faster").innerText = 'MPH ' + mph + ' with change ' + change;
+    }
