@@ -19,3 +19,16 @@ res.send('NOT IMPLEMENTED: Bag delete DELETE ' + req.params.id);
 exports.bag_update_put = function(req, res) {
 res.send('NOT IMPLEMENTED: Bag update PUT' + req.params.id);
 };
+
+// List of all Bag
+exports.bag_list = async function(req, res) {
+try{
+theBags = await Bag.find();
+res.send(theBags);
+}
+catch(err){
+res.status(500);
+res.send(`{"error": ${err}}`);
+}
+};
+
