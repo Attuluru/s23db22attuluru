@@ -8,14 +8,14 @@ var bag_controller = require('../controllers/bag');
 router.get('/', api_controller.api);
 /// BAGS ROUTES ///
 // POST request for creating a Bag.
-router.post('/bags', bag_controller.bag_create_post);
+router.post('/bag', bag_controller.bag_create_post);
 // DELETE request to delete Bag.
-router.delete('/bags/:id', bag_controller.bag_delete);
+router.delete('/bag/:id', bag_controller.bag_delete);
 // PUT request to update Bag.
-router.put('/bags/:id', bag_controller.bag_update_put);
+router.put('/bag/:id', bag_controller.bag_update_put);
 // GET request for one Bag.
-router.get('/bags/:id', bag_controller.bag_detail);
+router.get('/bag/:id', bag_controller.bag_detail);
 // GET request for list of all Costume items.
-router.get('/bags', bag_controller.bag_list);
+router.get('/bag', bag_controller.bag_list);
 module.exports = router;
 

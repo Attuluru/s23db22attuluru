@@ -64,7 +64,6 @@ console.log("Connection to DB succeeded")});
 
 var Bag = require("./models/bag");
 
-
 // We can seed the collection if needed on server start 
 async function recreateDB(){
 // Delete everything
