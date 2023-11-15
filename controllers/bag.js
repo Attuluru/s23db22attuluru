@@ -117,9 +117,8 @@ exports.bag_delete = async function(req, res) {
 exports.bag_view_one_Page = async function(req, res) {
 console.log("single view for id " + req.query.id)
 try{
-result = await bag.findById( req.query.id)
-res.render('bagdetail',
-{ title: 'bag Detail', toShow: result });
+result = await Bag.findById( req.query.id)
+res.render('bagdetail',{ title: 'bag Detail', toShow: result });
 }
 catch(err){
 res.status(500)
@@ -127,8 +126,47 @@ res.send(`{'error': '${err}'}`);
 }
 };
 
+// Handle building the view for creating a bag.
+// No body, no in path parameter, no query.
+// Does not need to be async
+exports.bag_create_Page = function(req, res) {
+    console.log("create view")
+    try{
+    res.render('bagcreate', { title: 'bag Create'});
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+    }
 
+// Handle building the view for updating a bag.
+// query provides the id
+exports.bag_update_Page = async function(req, res) {
+    console.log("update view for item "+req.query.id)
+    try{
+    let result = await Bag.findById(req.query.id)
+    res.render('bagupdate', { title: 'bag Update', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+    };
 
+// Handle a delete one view with id from query
+    exports.bag_delete_Page = async function(req, res) {
+    console.log("Delete view for id " + req.query.id)
+    try{
+    result = await Bag.findById(req.query.id)
+    res.render('bagdelete', { title: 'bag Delete', toShow:
+    result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+    };
 
 
 

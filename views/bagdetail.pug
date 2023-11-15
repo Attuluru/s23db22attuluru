@@ -1,25 +1,21 @@
-extends layout 
-
+extends layout
 block content
-h1= title
-- let bagid = toShow._id
-- let bagname = toShow.name
-- let bagtype = toShow.type
-- let bagcost = toShow.cost
-div
-div.row
-div(class='bagAttr mr-3') bag ID is:
-div #{bagid}
-div.row
-div(class='bagAttr mr-3') bag Type is:
-div #{bagname}
-div.row
-div(class='bagAttr mr-3') bag Size is:
-div #{bagtype}
-div.row
-div(class='bagAttr mr-3') bag Cost is:
-div #{bagcost}
-.bagAttr {
-background-color: aquamarine;
-width: 120px;
-}
+ h1= title
+
+ - let bagid = toShow._id
+ - let bagname = toShow.name
+ - let bagcost = toShow.cost
+ - let bagType = toShow.Type
+ div
+  div.row
+   div(class='bagAttr mr-3') bag ID is:
+   div #{bagid}
+  div.row
+   div(class='bagAttr mr-3') bag Name is:
+   div #{bagname}
+  div.row
+   div(class='bagAttr mr-3') bag Cost is:
+   div #{bagcost}
+  div.row
+   div(class='bagAttr mr-3') bag Type is:
+  div #{bagType}
