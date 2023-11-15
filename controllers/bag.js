@@ -52,7 +52,7 @@ exports.bag_create_post = async function(req, res) {
     // We are looking for a body, since POST does not have query parameters.
     // Even though bodies can be in many different formats, we will be picky
     // and require that it be a json object
-    // {"costume_type":"goat", "cost":12, "size":"large"}
+    // {"bag_type":"goat", "cost":12, "size":"large"}
     //{ name: "puma", cost: 20.99, Type: "Contander backpack" }
     document.name = req.body.name;
     document.cost = req.body.cost;
@@ -99,6 +99,36 @@ exports.bag_detail = async function(req, res) {
     failed`);
     }
     };
+    // Handle bag delete on DELETE.
+exports.bag_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await Bag.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+
+    };
+    
+// Handle a show one view with id specified by query
+exports.bag_view_one_Page = async function(req, res) {
+console.log("single view for id " + req.query.id)
+try{
+result = await bag.findById( req.query.id)
+res.render('bagdetail',
+{ title: 'bag Detail', toShow: result });
+}
+catch(err){
+res.status(500)
+res.send(`{'error': '${err}'}`);
+}
+};
+
+
+
 
 
 
