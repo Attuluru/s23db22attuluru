@@ -1,43 +1,58 @@
 extends layout
 
 block content
- h1= title
+  h1= title
 
- - let bagid = toShow._id
- - let bagname = toShow.name
- - let bagcost = toShow.cost
- - let bagType = toShow.Type
+  if (toShow == null)
+    h2 No instance to update details
+  else
+    - let bagid = toShow._id
+    - let bagname = toShow.name
+    - let bagcost = toShow.cost
+    - let bagType = toShow.Type
 
- div.row(class='mb-2')
-  div.mr-1 ID is
-  div #{bagid}
-  - let actionid = "/resource/bag/" + bagid
-  form(id='bagForm', action= actionid, method="PUT")
-   div.form-group
-    label.bagAttr(for='name') bag name
-    input#name(type='text', name='name', value= bagname )
-   div.form-group
-    label.bagAttr(for='cost') bag cost
-    input#cost(type='number', name='cost', value= bagcost )
-   div.form-group
-    label.bagAttr(for='Type') bag type
-    input#Type(type='text', name='Type', value= bagType )
-   input(type="submit")
+    div.row(class='mb-2')
+      div.mr-1 ID is
+      div #{bagid}
 
- script.
-  document.forms['bagForm'].addEventListener('submit', (event) => {
-   event.preventDefault();
-   // TODO do something here to show user that form is being submitted
-   fetch(event.target.action, {
-    method: 'PUT',
-    body: new URLSearchParams(new FormData(event.target)) // event.target is the form
-   }).then((resp) => {
-     return resp.json(); // or resp.text() or whatever the server sends
-   }).then((body) => {
-     alert("Update succeded")
-     // TODO handle body
-    }).catch((error) => {
-     // TODO handle error
-     alert("Update failed " + error )
-    });
-  });
+    - let actionid = "/resource/bag/" + bagid
+    form(id='bagForm', action=actionid, method="PUT")
+      div.form-group
+        label.bagAttr(for='name') bag name
+        input#name(type='text', name='name', value= bagname )
+      div.form-group
+        label.bagAttr(for='cost') bag cost
+        input#cost(type='number', name='cost', value= bagcost )
+      div.form-group
+        label.bagAttr(for='Type') bag type
+        input#Type(type='text', name='Type', value= bagType )
+      input(type="submit")
+
+      script.
+        document.forms['bagForm'].addEventListener('submit', async (event) => {
+          event.preventDefault();
+
+          try {
+            // Show user that form is being submitted
+            alert("Update in progress...");
+
+            const formData = new FormData(event.target);
+            const response = await fetch(event.target.action, {
+              method: 'PUT',
+              body: new URLSearchParams(formData),
+            });
+
+            if (!response.ok) {
+              throw new Error(`Update failed with status: ${response.status}`);
+            }
+
+            const responseBody = await response.json(); // or response.text() based on what the server sends
+            // TODO: Handle the response body as needed
+            alert("Update succeeded");
+
+          } catch (error) {
+            // Handle error
+            console.error("Update failed", error);
+            alert("Update failed: " + error.message);
+          }
+        });

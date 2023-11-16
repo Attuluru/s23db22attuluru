@@ -7,9 +7,29 @@ a {
   color: #00B7FF;
 }
 .bagAttr {
-  background-color: aquamarine;
-  width: 120px;
-  }
+  background-color: #4CAF50; /* Green */
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  width: 150px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.bagAttr:hover {
+  background-color: #45a049; /* Darker Green on Hover */
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* Add more styles as needed */
+
 
     
   
