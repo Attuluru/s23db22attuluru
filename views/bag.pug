@@ -2,18 +2,19 @@ extends layout
 
 block content
   h1= title
-  - let results = [{ name: "puma", cost: 20.99, Type: "Contander backpack" },{ name: "Under Armor", cost: 30.99, Type: "Hustle backpack" },{ name: "Nike", cost: 40.99, Type: "Elemental backpack" }]
+  - let items = results
   div.container-fluid
-    div.row
+    div(class="row m-1")
       each bag,index in results
-       div.col-sm-2(onclick=`buy(${index})`) #{bag.name}
-       div.col-sm-2(onclick=`buy(${index})`) #{bag.Type}
-       div.col-sm-2(onclick=`buy(${index})`) #{bag.cost}
-       br
-       hr
+        - let destination = `dispatch(\"/bag/update?id=${bag._id}\")`
+        div(class="row-sm-2", class="m-1" onclick=`buy($index)`) Bag #{bag.name} - #{bag.cost} - #{bag.Type}
+          button.btn(class="btn-primary ml-1", onclick= destination) Update
 
   script. 
       function buy(index)
       {
         alert(`you purchased Item ${index+1}`)
+      }
+      function dispatch(path){
+        window.location.href=path
       }

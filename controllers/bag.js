@@ -58,8 +58,8 @@ exports.bag_create_post = async function(req, res) {
     document.cost = req.body.cost;
     document.Type = req.body.Type;
     try{
-    let result = await document.save();
-    res.send(result);
+    let results = await document.save();
+    res.send(results);
     }
     catch(err){
     res.status(500);
