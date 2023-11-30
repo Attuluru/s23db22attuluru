@@ -1,6 +1,14 @@
 var express = require('express');
 const bag_controlers= require('../controllers/bag');
 var router = express.Router();
+
+const secured = (req, res, next) => {
+    if (req.user) {
+      return next();
+    }
+    res.redirect("/login");
+  };
+  
 // GET request for one bag.
 router.get('/bag/:id', bag_controlers.bag_detail);
 /* GET bags */

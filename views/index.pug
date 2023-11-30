@@ -1,17 +1,32 @@
+//- extends layout
+
+//- block content
+//-   h1 Akshay kumar gupta
+//-   p  Welcome to #{title} I am very boring
+//-   button.btn.btn-success(type="button", onclick="gofaster()") Press Me for details
+//-   div#faster Increase the speed 
+//-   a(href="/bag") View Bag page
+
+//-   script.
+//-     var mph = 20;
+//-     var change = 1;
+//-     function gofaster() {
+//-       mph = change + mph;
+//-       change = change + 1;
+//-       document.getElementById("faster").innerText = 'MPH ' + mph + ' with change ' + change;
+//-     }
+
 extends layout
 
 block content
-  h1 Akshay kumar gupta
-  p  Welcome to #{title} I am very boring
-  button.btn.btn-success(type="button", onclick="gofaster()") Press Me for details
-  div#faster Increase the speed 
-  a(href="/bag") View Bag page
+  if (!user)
+    a(href="/login") Login
+    br
+    a(href="/register") Register
+  if (user)
+    p You are currently logged in as #{user.username}
+    a(href="/bag") Take me to bag
+    br
+    a(href="/logout") Logout
 
-  script.
-    var mph = 20;
-    var change = 1;
-    function gofaster() {
-      mph = change + mph;
-      change = change + 1;
-      document.getElementById("faster").innerText = 'MPH ' + mph + ' with change ' + change;
-    }
+

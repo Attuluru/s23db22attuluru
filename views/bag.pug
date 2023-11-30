@@ -2,19 +2,26 @@ extends layout
 
 block content
   h1= title
+  a(class="btn btn-success" href="/bag/create") Create
+
   - let items = results
   div.container-fluid
     div(class="row m-1")
-      each bag,index in results
-        - let destination = `dispatch(\"/bag/update?id=${bag._id}\")`
-        div(class="row-sm-2", class="m-1" onclick=`buy($index)`) Bag #{bag.name} - #{bag.cost} - #{bag.Type}
-          button.btn(class="btn-primary ml-1", onclick= destination) Update
+      each bag, index in results
+        - let destination = `/bag/update?id=${bag._id}`
+        div(class="card m-1", style="cursor: pointer;", onclick=`buy(${index})`)
+          div.card-body
+            h5.card-title Bag #{bag.name}</h5>
+            p.card-text Cost: #{bag.cost} - Type: #{bag.Type}
+            button.btn.btn-primary.ml-1(onclick=`dispatch("${destination}")`) Update
+            a.btn.btn-danger(href=`/bag/delete?id=${bag._id}`) Delete
+            a.btn.btn-dark(href=`/bag/detail?id=${bag._id}`) Detail
 
-  script. 
-      function buy(index)
-      {
-        alert(`you purchased Item ${index+1}`)
-      }
-      function dispatch(path){
-        window.location.href=path
-      }
+  script.
+    function buy(index) {
+      alert(`You purchased Item ${index + 1}`);
+    }
+
+    function dispatch(path) {
+      window.location.href = path;
+    }
